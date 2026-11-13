@@ -1,0 +1,30 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - heading "Моя копилка" [level=1] [ref=e3]
+    - generic [ref=e4]:
+      - button "Настройки" [ref=e5] [cursor=pointer]
+      - button "Добавить копилку" [ref=e9] [cursor=pointer]
+    - button "Добавить 1 000 рублей в копилку" [ref=e12] [cursor=pointer]:
+      - generic [ref=e14]: +1 000
+    - region "Копилки" [ref=e15]:
+      - button "Учёба, 3 000 ₽. Изменить копилку" [ref=e16] [cursor=pointer]:
+        - generic [ref=e22]: Учёба
+        - generic [ref=e23]: 3 000 ₽
+      - button "Поездка, 5 000 ₽. Изменить копилку" [ref=e24] [cursor=pointer]:
+        - generic [ref=e32]: Поездка
+        - generic [ref=e33]: 5 000 ₽
+      - button "Подарки, 2 000 ₽. Изменить копилку" [ref=e34] [cursor=pointer]:
+        - generic [ref=e39]: Подарки
+        - generic [ref=e40]: 2 000 ₽
+      - button "Здоровье, 4 000 ₽. Изменить копилку" [ref=e41] [cursor=pointer]:
+        - generic [ref=e48]: Здоровье
+        - generic [ref=e49]: 4 000 ₽
+      - button "Резерв, 6 000 ₽. Изменить копилку" [ref=e50] [cursor=pointer]:
+        - generic [ref=e59]: Резерв
+        - generic [ref=e60]: 6 000 ₽
+      - button "Добавить копилку" [ref=e61] [cursor=pointer]:
+        - generic [ref=e65]: Новая копилка
+    - generic [ref=e66]:
+      - generic [ref=e67]: Всего в копилках
+      - strong [ref=e68]: 20 000 ₽
+  - status

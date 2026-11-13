@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-13T17:48:56.179Z",
+  "jars": [
+    {
+      "id": "study",
+      "name": "На мечту",
+      "amount": 1100050,
+      "color": "#a9d9ce"
+    },
+    {
+      "id": "travel",
+      "name": "Поездка",
+      "amount": 500000,
+      "color": "#b7dcb0"
+    },
+    {
+      "id": "gifts",
+      "name": "Подарки",
+      "amount": 200000,
+      "color": "#edafc3"
+    },
+    {
+      "id": "health",
+      "name": "Здоровье",
+      "amount": 400000,
+      "color": "#afcfe5"
+    },
+    {
+      "id": "reserve",
+      "name": "Резерв",
+      "amount": 600000,
+      "color": "#f1cf95"
+    }
+  ]
+}

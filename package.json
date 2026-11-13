@@ -1,0 +1,11 @@
+{
+  "name": "kopilka",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Мобильная копилка с монетками и сохранением в браузере",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

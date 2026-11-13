@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#111014">
+    <meta name="description" content="Твоя копилка: маленькие монетки для больших планов.">
+    <title>Копилка</title>
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" type="module"></script>
+  </head>
+  <body>
+    <main class="app">
+      <h1 class="sr-only">Моя копилка</h1>
+      <header class="toolbar">
+        <button class="icon-button" id="settings-button" aria-label="Настройки">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m13 3-1 4-3 1-4-1-3 5 3 3v3l-3 3 3 5 4-1 3 1 1 4h6l1-4 3-1 4 1 3-5-3-3v-3l3-3-3-5-4 1-3-1-1-4Z"/><circle cx="16" cy="16.5" r="5"/></svg>
+        </button>
+        <button class="icon-button" id="add-button" aria-label="Добавить копилку">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v24M4 16h24"/></svg>
+        </button>
+      </header>
+
+      <button class="deposit-button" id="deposit-button" aria-label="Добавить 1 000 рублей в копилку">
+        <span class="coin" aria-hidden="true"><img src="assets/coin.png" alt="" draggable="false"></span>
+        <span>+1 000</span>
+      </button>
+
+      <section class="jars" id="jars" aria-label="Копилки"></section>
+      <footer class="summary">
+        <span class="summary-label">Всего в копилках</span>
+        <strong id="total">0 ₽</strong>
+      </footer>
+      <noscript><p class="noscript">Для работы копилки включи JavaScript в браузере.</p></noscript>
+    </main>
+
+    <dialog class="sheet" id="editor" aria-labelledby="editor-title">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <header class="sheet-header">
+        <h2 id="editor-title">Изменить копилку</h2>
+        <button class="close-button" data-close aria-label="Закрыть">×</button>
+      </header>
+      <form id="jar-form" novalidate>
+        <label class="field-label" for="jar-name">Название</label>
+        <input id="jar-name" name="name" type="text" maxlength="32" placeholder="Например, на мечту" autocomplete="off" required>
+        <label class="field-label" for="jar-amount">Сумма в копилке</label>
+        <div class="money-field">
+          <input id="jar-amount" name="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="amount-hint" required>
+          <span aria-hidden="true">₽</span>
+        </div>
+        <p class="field-hint" id="amount-hint">Одна монетка — 1 000 ₽. Можно указать и копейки.</p>
+        <div class="amount-actions">
+          <button type="button" data-adjust="-100000">−1 000 ₽</button>
+          <button type="button" data-adjust="100000">+1 000 ₽</button>
+        </div>
+        <fieldset class="color-field">
+          <legend class="field-label">Цвет копилки</legend>
+          <div class="color-options" id="color-options"></div>
+        </fieldset>
+        <p class="form-error" id="editor-error" role="alert"></p>
+        <button class="primary-button" type="submit" id="save-button">Сохранить</button>
+        <button class="text-button danger" type="button" id="delete-button">Удалить копилку</button>
+      </form>
+    </dialog>
+
+    <dialog class="sheet" id="deposit" aria-labelledby="deposit-title">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <header class="sheet-header">
+        <div><h2 id="deposit-title">Куда добавим монетку?</h2><p class="sheet-subtitle">Выбери копилку для +1 000 ₽</p></div>
+        <button class="close-button" data-close aria-label="Закрыть">×</button>
+      </header>
+      <div class="deposit-list" id="deposit-list"></div>
+    </dialog>
+
+    <dialog class="sheet" id="settings" aria-labelledby="settings-title">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <header class="sheet-header">
+        <h2 id="settings-title">Твоя копилка</h2>
+        <button class="close-button" data-close aria-label="Закрыть">×</button>
+      </header>
+      <div class="settings-intro"><span class="coin" aria-hidden="true"><img src="assets/coin.png" alt="" draggable="false"></span><p>Маленькие монетки.<br>Большие планы.</p></div>
+      <div class="settings-note"><strong>Всё сохраняется автоматически</strong><p>Данные хранятся в этом браузере на этом устройстве. Скачай резервную копию, чтобы перенести накопления или восстановить их после очистки браузера.</p></div>
+      <button class="secondary-button" id="export-button">Скачать резервную копию</button>
+      <button class="secondary-button" id="import-button">Загрузить резервную копию</button>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+      <p class="settings-caption">1 монетка = 1 000 ₽<br>Копилка помогает вести учёт накоплений.</p>
+    </dialog>
+
+    <dialog class="sheet confirmation" id="confirmation" aria-labelledby="confirmation-title">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <h2 id="confirmation-title">Удалить копилку?</h2>
+      <p id="confirmation-description"></p>
+      <div class="confirmation-actions">
+        <button class="secondary-button" id="confirm-cancel">Отмена</button>
+        <button class="primary-button" id="confirm-accept">Удалить</button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" popover="manual"></div>
+  </body>
+</html>
